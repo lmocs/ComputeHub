@@ -1,4 +1,4 @@
-from wtforms import DecimalField, RadioField, StringField, SubmitField
+from wtforms import FloatField, RadioField, StringField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 from flask_wtf import FlaskForm
@@ -8,7 +8,7 @@ class NameForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class TipForm(FlaskForm):
-    subtotal = DecimalField('Enter the subtotal: ', validators=[DataRequired()])
+    subtotal = FloatField('Enter the subtotal: ', validators=[DataRequired()])
     tip = RadioField(
         'Choose a tip percentage: ',
         choices=[

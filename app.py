@@ -1,3 +1,4 @@
+from re import sub
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
@@ -34,12 +35,23 @@ def index():
 @app.route('/tip', methods=['GET', 'POST'])
 def tip():
     form = TipForm()
-    form.validate_on_submit()
-    return render_template('index.html', form=form, message='error')
+    data = {
+        'subtotal': form.subtotal.data,
+        'tip': form.tip.data,
+        'message': '',
+        'total': None,
+    }
 
-# NOTE: If the template uses many vars, pass a dict instead
-# Use {{ dictionary[''] }}
-# calculator.calculateTip()
+    if form.validate_on_submit():
+        try:
+            data['total'] = calculateTip(data['subtotal'], float(data['tip']))
+            data['message'] = 'Success'
+        except Exception as e:
+            data['message'] = f'Error calculating tip: {e}'
+    else:
+        data['message'] = 'Please fill in all fields correctly.'
+
+    return render_template('index.html', form=form, data=data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

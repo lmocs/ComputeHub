@@ -2,12 +2,6 @@
 
 {% block content %}
 
-<!--
-	TIPS about using Bootstrap-Flask:
-	https://github.com/helloflask/bootstrap-flask
-	https://bootstrap-flask.readthedocs.io/
--->
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
@@ -16,7 +10,10 @@
 
 			{{ render_form(form) }}
 
-			<p class="pt-5"><strong>{{ message }}</strong></p>
+			{% if data['total'] %}
+				<p class="pt-5"><strong>{{ data['total'] }}</strong></p>
+			{% endif %}
+			<p class="pt-5"><strong>{{ data['message'] }}</strong></p>
 
 		</div>
 	</div>

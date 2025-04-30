@@ -1,10 +1,9 @@
 import math
 
-def calculateTip():
-    total = int(input("enter a total, before tax: "))
-    tip = int(input("enter the percent you want to tip: "))
-    send = total * (tip / 100)
-    total += send
+# TODO: Return tip as well to display.
+def calculateTip(subtotal, tip):
+    total = subtotal * (tip / 100.0)
+    total += subtotal
     return "{:.2f}".format(total)
 
 def calculateCompoundInterest():
