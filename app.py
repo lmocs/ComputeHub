@@ -13,16 +13,8 @@ bootstrap = Bootstrap5(app)
 csrf = CSRFProtect(app)
 
 @app.route('/')
-def home():
-    return f'<h1>Home</h1>'
-
-@app.route('/user/<name>')
-def user(name):
-    return render_template(
-        'home.html',
-        name=name,
-        calculator='tip'
-    )
+def base():
+    return render_template('base.html')
 
 @app.route('/tip', methods=['GET', 'POST'])
 def tip():

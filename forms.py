@@ -3,6 +3,8 @@ from wtforms.validators import DataRequired
 
 from flask_wtf import FlaskForm
 
+# TODO: Add validators for negative values and non-float values.
+
 class TipForm(FlaskForm):
     subtotal = FloatField('Enter the subtotal: ', validators=[DataRequired()])
     tip = RadioField(
