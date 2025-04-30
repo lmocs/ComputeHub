@@ -3,8 +3,8 @@ from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
 import secrets
 
-from forms import TipForm, CompoundInterestForm
-from calculator import calculateCompoundInterest, calculateTip
+from forms import TipForm, CompoundInterestForm, InternshipPayForm
+from calculator import calculateCompoundInterest, calculateInternshipPay, calculateTip
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
@@ -68,19 +68,20 @@ def compoundInterest():
 
     return render_template('index.html', form=form, data=data)
 
-@app.route('/internship', methods=['GET', 'POST'])
+@app.route('/i', methods=['GET', 'POST'])
 def internshipPay():
-    form = TipForm()
+    form = InternshipPayForm()
     data = {
-        'subtotal': form.subtotal.data,
-        'tip': form.tip.data,
+        'hourly_rate': form.hourly_rate.data,
+        'hours': form.hours.data,
+        'weeks': form.weeks.data,
         'message': '',
         'total': None,
     }
 
     if form.validate_on_submit():
         try:
-            data['total'] = calculateTip(data['subtotal'], float(data['tip']))
+            data['total'] = calculateInternshipPay(data)
             data['message'] = 'Success'
         except Exception as e:
             data['message'] = f'Error calculating tip: {e}'

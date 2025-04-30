@@ -1,4 +1,4 @@
-from wtforms import FloatField, RadioField, SubmitField
+from wtforms import FloatField, RadioField, SubmitField, validators
 from wtforms.validators import DataRequired
 
 from flask_wtf import FlaskForm
@@ -31,4 +31,10 @@ class CompoundInterestForm(FlaskForm):
         ]
     )
     time = FloatField('Enter time (in years): ', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class InternshipPayForm(FlaskForm):
+    hourly_rate = FloatField('Enter hourly rate: ', validators=[DataRequired()])
+    hours = FloatField('Enter hours worked in a week: ', validators=[DataRequired()], default=40)
+    weeks = FloatField('Enter number of weeks working: ', validators=[DataRequired()])
     submit = SubmitField('Submit')

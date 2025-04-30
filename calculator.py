@@ -15,13 +15,6 @@ def calculateCompoundInterest(data):
     total = data['principal'] * interest
     return "{:.2f}".format(total)
 
-def calculateInternshipPay():
-    weeks = int(input("enter number of weeks: "))
-    hours = int(input("enter number of hours per week: "))
-    rate = float(input("enter pay rate per hour: "))
-    total = rate * hours * weeks
+def calculateInternshipPay(data):
+    total = data['hourly_rate'] * data['hours'] * data['weeks']
     return "{:.2f}".format(total)
-
-# print(calculateTip())
-# print(calculateInternshipPay())
-# print(calculateCompoundInterest())
