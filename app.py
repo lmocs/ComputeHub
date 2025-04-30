@@ -36,7 +36,7 @@ def tip():
 
     if form.validate_on_submit():
         try:
-            data['total'] = calculateTip(data['subtotal'], float(data['tip']))
+            data['total'] = calculateTip(data)
             data['message'] = 'Success'
         except Exception as e:
             data['message'] = f'Error calculating tip: {e}'
@@ -84,7 +84,7 @@ def internshipPay():
             data['total'] = calculateInternshipPay(data)
             data['message'] = 'Success'
         except Exception as e:
-            data['message'] = f'Error calculating tip: {e}'
+            data['message'] = f'Error calculating internship pay: {e}'
     else:
         data['message'] = 'Please fill in all fields correctly.'
 

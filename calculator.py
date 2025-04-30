@@ -1,9 +1,9 @@
 import math
 
 # TODO: Return tip as well to display.
-def calculateTip(subtotal, tip):
-    total = subtotal * (tip / 100.0)
-    total += subtotal
+def calculateTip(data):
+    total = data['subtotal'] * (data['tip'] / 100.0)
+    total += data['subtotal']
     return "{:.2f}".format(total)
 
 def calculateCompoundInterest(data):
