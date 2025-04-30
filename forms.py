@@ -1,4 +1,4 @@
-from wtforms import FloatField, RadioField, SubmitField, validators
+from wtforms import FloatField, RadioField, SubmitField
 from wtforms.validators import DataRequired
 
 from flask_wtf import FlaskForm
@@ -9,7 +9,9 @@ class TipForm(FlaskForm):
         'Choose a tip percentage: ',
         choices=[
             (10, '10%'),
+            (12, '12%'),
             (15, '15%'),
+            (18, '18%'),
             (20, '20%'),
             (25, '25%'),
             (30, '30%'),

@@ -24,7 +24,7 @@ def user(name):
         calculator='tip'
     )
 
-@app.route('/t', methods=['GET', 'POST'])
+@app.route('/tip', methods=['GET', 'POST'])
 def tip():
     form = TipForm()
     data = {
@@ -36,7 +36,7 @@ def tip():
 
     if form.validate_on_submit():
         try:
-            data['total'] = calculateTip(data)
+            data['tip'], data['total'] = calculateTip(data)
             data['message'] = 'Success'
         except Exception as e:
             data['message'] = f'Error calculating tip: {e}'
@@ -45,7 +45,7 @@ def tip():
 
     return render_template('index.html', form=form, data=data)
 
-@app.route('/c', methods=['GET', 'POST'])
+@app.route('/compound-interest', methods=['GET', 'POST'])
 def compoundInterest():
     form = CompoundInterestForm()
     data = {
@@ -68,7 +68,7 @@ def compoundInterest():
 
     return render_template('index.html', form=form, data=data)
 
-@app.route('/i', methods=['GET', 'POST'])
+@app.route('/internship-pay', methods=['GET', 'POST'])
 def internshipPay():
     form = InternshipPayForm()
     data = {
