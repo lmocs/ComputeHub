@@ -1,7 +1,16 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap5
+from flask_wtf import CSRFProtect
+import secrets
+
+from forms import NameForm, TipForm
 from calculator import calculateTip
 
 app = Flask(__name__)
+app.secret_key = secrets.token_urlsafe(16)
+
+bootstrap = Bootstrap5(app)
+csrf = CSRFProtect(app)
 
 @app.route('/')
 def home():
@@ -14,6 +23,19 @@ def user(name):
         name=name,
         calculator='tip'
     )
+
+@app.route('/form', methods=['GET', 'POST'])
+def index():
+    form = NameForm()
+    form.validate_on_submit()
+    return render_template('index.html', form=form, message='error')
+
+
+@app.route('/tip', methods=['GET', 'POST'])
+def tip():
+    form = TipForm()
+    form.validate_on_submit()
+    return render_template('index.html', form=form, message='error')
 
 # NOTE: If the template uses many vars, pass a dict instead
 # Use {{ dictionary[''] }}
