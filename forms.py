@@ -1,11 +1,7 @@
-from wtforms import FloatField, RadioField, StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import FloatField, RadioField, SubmitField
+from wtforms.validators import DataRequired
 
 from flask_wtf import FlaskForm
-
-class NameForm(FlaskForm):
-    name = StringField('Which actor is your favorite?', validators=[DataRequired(), Length(10, 40)])
-    submit = SubmitField('Submit')
 
 class TipForm(FlaskForm):
     subtotal = FloatField('Enter the subtotal: ', validators=[DataRequired()])
@@ -19,4 +15,20 @@ class TipForm(FlaskForm):
             (30, '30%'),
         ]
     )
+    submit = SubmitField('Submit')
+
+class CompoundInterestForm(FlaskForm):
+    principal = FloatField('Enter principal: ', validators=[DataRequired()])
+    annual_rate = FloatField('Enter estimated annual rate: ', validators=[DataRequired()])
+    compound_rate = RadioField(
+        'Choose a compound rate: ',
+        choices=[
+            (1, 'Annually'),
+            (2, 'Semi-annually'),
+            (4, 'Quarterly'),
+            (12, 'Monthly'),
+            (365, 'Daily'),
+        ]
+    )
+    time = FloatField('Enter time (in years): ', validators=[DataRequired()])
     submit = SubmitField('Submit')

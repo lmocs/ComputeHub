@@ -6,12 +6,13 @@ def calculateTip(subtotal, tip):
     total += subtotal
     return "{:.2f}".format(total)
 
-def calculateCompoundInterest():
-    principal = float(input("enter principal: "))
-    interest_rate = float(input("enter interest rate: "))
-    compound_rate = float(input("enter compound rate: "))
-    time = float(input("enter time in years: "))
-    total = principal * math.pow((1 + interest_rate / compound_rate), compound_rate * time)
+def calculateCompoundInterest(data):
+    annual_rate = data['annual_rate'] / 100
+    compound_rate = float(data['compound_rate'])
+
+    interest = 1 + (annual_rate / compound_rate)
+    interest = math.pow(interest, compound_rate * data['time'])
+    total = data['principal'] * interest
     return "{:.2f}".format(total)
 
 def calculateInternshipPay():
