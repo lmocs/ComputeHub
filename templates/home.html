@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+
+<div class="lead position-absolute top-50 start-50 translate-middle text-center">
+	<h1 class="display-4">ComputeHub</h1>
+	<p class="fs-4 text-break">
+		The all-in-one calculator hub for the things a college student should know how to do themselves<br>
+		<span class="text-decoration-line-through">but is too embarrassed to admit it</span>
+	</p>
+
+	{% from 'bootstrap4/nav.html' import render_breadcrumb_item %}
+
+	<nav aria-label="breadcrumb" class="mt-4">
+		<ol class="breadcrumb justify-content-center bg-transparent border-0 m-0 p-0">
+			{{ render_breadcrumb_item('home', 'Home') }}
+			{{ render_breadcrumb_item('tip', 'Tip') }}
+			{{ render_breadcrumb_item('compoundInterest', 'Compound Interest') }}
+			{{ render_breadcrumb_item('internshipPay', 'Internship Pay') }}
+		</ol>
+	</nav>
+</div>
+
+{% endblock %}

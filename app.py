@@ -12,12 +12,15 @@ app.secret_key = secrets.token_urlsafe(16)
 bootstrap = Bootstrap5(app)
 csrf = CSRFProtect(app)
 
+app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'sketchy'
+
 @app.route('/')
-def base():
-    return render_template('base.html')
+def home():
+    return render_template('home.html')
 
 @app.route('/tip', methods=['GET', 'POST'])
 def tip():
+    name = 'Tip'
     form = TipForm()
     data = {
         'subtotal': form.subtotal.data,
@@ -35,10 +38,11 @@ def tip():
     else:
         data['message'] = 'Please fill in all fields correctly.'
 
-    return render_template('index.html', form=form, data=data)
+    return render_template('index.html', name=name, form=form, data=data)
 
 @app.route('/compound-interest', methods=['GET', 'POST'])
 def compoundInterest():
+    name = 'Compound Interest'
     form = CompoundInterestForm()
     data = {
         'principal': form.principal.data,
@@ -58,10 +62,11 @@ def compoundInterest():
     else:
         data['message'] = 'Please fill in all fields correctly.'
 
-    return render_template('index.html', form=form, data=data)
+    return render_template('index.html', name=name, form=form, data=data)
 
 @app.route('/internship-pay', methods=['GET', 'POST'])
 def internshipPay():
+    name = 'Internship Pay'
     form = InternshipPayForm()
     data = {
         'hourly_rate': form.hourly_rate.data,
@@ -80,7 +85,7 @@ def internshipPay():
     else:
         data['message'] = 'Please fill in all fields correctly.'
 
-    return render_template('index.html', form=form, data=data)
+    return render_template('index.html', name=name, form=form, data=data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

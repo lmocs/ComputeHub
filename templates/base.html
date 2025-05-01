@@ -1,18 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Cloud Calculator</title>
+	<title>ComputeHub</title>
+	{{ bootstrap.load_css() }}
 </head>
 
 <body>
+	{% from 'bootstrap5/nav.html' import render_nav_item %}
 
-	<div>
-		<h1>Hello!</h1>
+	<nav class="lead navbar navbar-expand-lg navbar-light bg-light">
+		<div class="navbar-nav mr-auto">
+			{{ render_nav_item('home', 'Home') }}
+			{{ render_nav_item('tip', 'Tip') }}
+			{{ render_nav_item('compoundInterest', 'Compound Interest') }}
+			{{ render_nav_item('internshipPay', 'Internship Pay') }}
+		</div>
+	</nav>
+
+	<div class="container">
+		{% block content %}{% endblock %}
 	</div>
 
+	{{ bootstrap.load_js() }}
 </body>
 
 </html>
