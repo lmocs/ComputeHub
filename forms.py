@@ -1,12 +1,11 @@
 from wtforms import FloatField, RadioField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import InputRequired, NumberRange
 
 from flask_wtf import FlaskForm
 
-# TODO: Add validators for negative values and non-float values.
 
 class TipForm(FlaskForm):
-    subtotal = FloatField('Enter the subtotal: ', validators=[DataRequired()])
+    subtotal = FloatField('Enter the subtotal: ', validators=[InputRequired(), NumberRange(min=0)])
     tip = RadioField(
         'Choose a tip percentage: ',
         choices=[
@@ -22,8 +21,8 @@ class TipForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class CompoundInterestForm(FlaskForm):
-    principal = FloatField('Enter principal: ', validators=[DataRequired()])
-    annual_rate = FloatField('Enter estimated annual rate: ', validators=[DataRequired()])
+    principal = FloatField('Enter principal: ', validators=[InputRequired(), NumberRange(min=0)])
+    annual_rate = FloatField('Enter estimated annual rate: ', validators=[InputRequired(), NumberRange(min=0)])
     compound_rate = RadioField(
         'Choose a compound rate: ',
         choices=[
@@ -34,11 +33,11 @@ class CompoundInterestForm(FlaskForm):
             (365, 'Daily'),
         ]
     )
-    time = FloatField('Enter time (in years): ', validators=[DataRequired()])
+    time = FloatField('Enter time (in years): ', validators=[InputRequired(), NumberRange(min=0)])
     submit = SubmitField('Submit')
 
 class InternshipPayForm(FlaskForm):
-    hourly_rate = FloatField('Enter hourly rate: ', validators=[DataRequired()])
-    hours = FloatField('Enter hours worked in a week: ', validators=[DataRequired()], default=40)
-    weeks = FloatField('Enter number of weeks working: ', validators=[DataRequired()])
+    hourly_rate = FloatField('Enter hourly rate: ', validators=[InputRequired(), NumberRange(min=0)])
+    hours = FloatField('Enter hours worked in a week: ', validators=[InputRequired(), NumberRange(min=0)], default=40)
+    weeks = FloatField('Enter number of weeks working: ', validators=[InputRequired(), NumberRange(min=0)])
     submit = SubmitField('Submit')
