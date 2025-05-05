@@ -3,8 +3,8 @@ from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
 import secrets
 
-from forms import TipForm, CompoundInterestForm, InternshipPayForm
-from calculator import calculateCompoundInterest, calculateInternshipPay, calculateTip
+from forms import SplitBillForm, CompoundInterestForm, InternshipPayForm
+from calculator import calculateSplitBill, calculateCompoundInterest, calculateInternshipPay
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
@@ -18,23 +18,25 @@ app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'sketchy'
 def home():
     return render_template('home.html')
 
-@app.route('/tip', methods=['GET', 'POST'])
-def tip():
-    name = 'Tip'
-    form = TipForm()
+@app.route('/split-bill', methods=['GET', 'POST'])
+def splitBill():
+    name = 'Split Bill'
+    form = SplitBillForm()
     data = {
         'subtotal': form.subtotal.data,
         'tip': form.tip.data,
+        'people': form.people.data,
         'message': '',
         'total': None,
+        'cost_per_person': None,
     }
 
     if form.validate_on_submit():
         try:
-            data['tip'], data['total'] = calculateTip(data)
+            data['total'], data['cost_per_person'] = calculateSplitBill(data)
             data['message'] = 'Success'
         except Exception as e:
-            data['message'] = f'Error calculating tip: {e}'
+            data['message'] = f'Error calculating the total per person: {e}'
     else:
         data['message'] = 'Please fill in all fields correctly.'
 

@@ -1,9 +1,10 @@
 import math
 
-def calculateTip(data):
+def calculateSplitBill(data):
     tip = data['subtotal'] * (float(data['tip']) / 100)
     total = data['subtotal'] + tip
-    return "{:.2f}".format(tip), "{:.2f}".format(total)
+    cost_per_person = total / data['people']
+    return "{:.2f}".format(total), "{:.2f}".format(cost_per_person)
 
 def calculateCompoundInterest(data):
     annual_rate = data['annual_rate'] / 100
@@ -17,3 +18,6 @@ def calculateCompoundInterest(data):
 def calculateInternshipPay(data):
     total = data['hourly_rate'] * data['hours'] * data['weeks']
     return "{:.2f}".format(total)
+
+def calculateHourlyRateToAnnualSalary(data):
+    return

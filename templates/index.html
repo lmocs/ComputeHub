@@ -12,11 +12,10 @@
 			{{ render_form(form) }}
 
 			{% if data['total'] %}
-				<p class="pt-5"><strong>Calculation: {{ data['message'] }}!</strong></p>
-				{% if data['tip'] %}
-					<p class="pt-5"><strong>Tip: ${{ data['tip'] }}</strong></p>
-				{% endif %}
 				<p class="pt-5"><strong>Total: ${{ data['total'] }}</strong></p>
+				{% if data['cost_per_person'] %}
+					<p class="pt-5"><strong>Cost Per Person: ${{ data['cost_per_person'] }}</strong></p>
+				{% endif %}
 			{% endif %}
 
 		</div>

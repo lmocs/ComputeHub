@@ -1,14 +1,15 @@
-from wtforms import FloatField, RadioField, SubmitField
+from wtforms import FloatField, IntegerField, RadioField, SubmitField
 from wtforms.validators import InputRequired, NumberRange
 
 from flask_wtf import FlaskForm
 
 
-class TipForm(FlaskForm):
+class SplitBillForm(FlaskForm):
     subtotal = FloatField('Enter the subtotal: ', validators=[InputRequired(), NumberRange(min=0)])
     tip = RadioField(
         'Choose a tip percentage: ',
         choices=[
+            (0, '0%'),
             (10, '10%'),
             (12, '12%'),
             (15, '15%'),
@@ -18,6 +19,7 @@ class TipForm(FlaskForm):
             (30, '30%'),
         ]
     )
+    people = IntegerField('Enter the number of people: ', validators=[InputRequired(), NumberRange(min=1)])
     submit = SubmitField('Submit')
 
 class CompoundInterestForm(FlaskForm):
